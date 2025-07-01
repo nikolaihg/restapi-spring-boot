@@ -1,0 +1,27 @@
+###
+GET http://localhost:8080
+
+###
+GET http://localhost:8080/api/v1/software-engineers
+
+###
+POST http://localhost:8080/api/v1/software-engineers
+Content-Type: application/json
+
+{
+  "name": "Nikolai",
+  "techStack": "go, rust, kubernetes"
+}
+
+###
+PUT http://localhost:8080/api/v1/software-engineers/2
+Content-Type: application/json
+
+{
+  "name": "Jamila Hassan",
+  "techStack": "java, spring boot, docker"
+}
+
+###
+DELETE http://localhost:8080/api/v1/software-engineers/1
+
