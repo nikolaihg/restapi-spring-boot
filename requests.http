@@ -2,14 +2,13 @@
 GET http://localhost:8080
 
 ###
-GET http://localhost:8080/api/v1/software-engineers
+GET http://localhost:8080/api/v2/software-engineers
 
 ###
-GET http://localhost:8080/api/v1/software-engineers/1
-
+GET http://localhost:8080/api/v2/software-engineers/1
 
 ###
-POST http://localhost:8080/api/v1/software-engineers
+POST http://localhost:8080/api/v2/software-engineers
 Content-Type: application/json
 
 {
@@ -18,7 +17,50 @@ Content-Type: application/json
 }
 
 ###
-PUT http://localhost:8080/api/v1/software-engineers/2
+POST http://localhost:8080/api/v2/software-engineers
+Content-Type: application/json
+
+{
+  "name": "Jamila",
+  "techStack": "java, spring boot, docker"
+}
+
+###
+POST http://localhost:8080/api/v2/software-engineers
+Content-Type: application/json
+
+{
+  "name": "Aisha",
+  "techStack": "python, django, react"
+}
+
+###
+POST http://localhost:8080/api/v2/software-engineers
+Content-Type: application/json
+
+{
+  "name": "Carlos",
+  "techStack": "c#, .net, angular"
+}
+
+###
+POST http://localhost:8080/api/v2/software-engineers
+Content-Type: application/json
+
+{
+  "name": "Liam",
+  "techStack": "node.js, express, vue"
+}
+
+
+###
+GET http://localhost:8080/api/v2/software-engineers
+
+###
+GET http://localhost:8080/api/v2/software-engineers/2
+
+###
+PUT http://localhost:8080/api/v2/software-engineers/2
 Content-Type: application/json
 
 {
@@ -27,5 +69,13 @@ Content-Type: application/json
 }
 
 ###
-DELETE http://localhost:8080/api/v1/software-engineers/1
+GET http://localhost:8080/api/v2/software-engineers/2
 
+###
+DELETE http://localhost:8080/api/v2/software-engineers/1
+
+###
+GET http://localhost:8080/api/v2/software-engineers
+
+###
+GET http://localhost:8080/api/v2/software-engineers/1

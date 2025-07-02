@@ -1,12 +1,13 @@
 package com.nikolaihg;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
-@RequestMapping("api/v1/software-engineers")
+@RequestMapping("api/v2/software-engineers")
 public class SoftwareEngineerController {
 
     private final SoftwareEngineerService softwareEngineerService;
@@ -16,56 +17,33 @@ public class SoftwareEngineerController {
     }
 
     @GetMapping
-    public List<SoftwareEngineer> getSoftwareEngineers() {
-        return softwareEngineerService.getAllSoftwareEngineers();
+    public ResponseEntity<List<SoftwareEngineer>> getSoftwareEngineers() {
+        List<SoftwareEngineer> engineers = softwareEngineerService.getAllSoftwareEngineers();
+        return ResponseEntity.ok(engineers);
     }
 
     @GetMapping("{id}")
-    public SoftwareEngineer getSoftwareEngineersById(@PathVariable Integer id) {
-        return softwareEngineerService.getAllSoftwareEngineerById(id);
+    public ResponseEntity<SoftwareEngineer> getSoftwareEngineersById(@PathVariable Integer id) {
+        SoftwareEngineer engineer = softwareEngineerService.getAllSoftwareEngineerById(id);
+        return ResponseEntity.ok(engineer);
     }
 
     @PostMapping
-    public void AddNewSoftwareEngineer(@RequestBody SoftwareEngineer softwareEngineer) {
-        // should use dto
-        softwareEngineerService.insertSoftwareEngineer(softwareEngineer);
+    public ResponseEntity<Void> addNewSoftwareEngineer(@RequestBody SoftwareEngineer softwareEngineer) {
+        SoftwareEngineer createdEngineer = softwareEngineerService.insertSoftwareEngineer(softwareEngineer);
+        URI location = URI.create(String.format("/api/v2/software-engineers/%d", createdEngineer.getId()));
+        return ResponseEntity.created(location).build();
     }
 
-    /*
-    @PostMapping
-    public SoftwareEngineer addSoftwareEngineer(@RequestBody SoftwareEngineer softwareEngineer) {
-        softwareEngineer.setId(softwareEngineers.size() + 1);
-        softwareEngineers.add(softwareEngineer);
-        return softwareEngineer;
+    @PutMapping("{id}")
+    public ResponseEntity<Void> updateSoftwareEngineer(@PathVariable Integer id, @RequestBody SoftwareEngineer softwareEngineer) {
+        softwareEngineerService.updateSoftwareEngineerByID(id, softwareEngineer);
+        return ResponseEntity.ok().build();
     }
 
-    @PutMapping("/{id}")
-    public SoftwareEngineer updateSoftwareEngineer(
-            @PathVariable int id,
-            @RequestBody SoftwareEngineer updatedEngineer) {
-
-        Optional<SoftwareEngineer> existingEngineer = softwareEngineers.stream()
-                .filter(se -> se.getId() == id)
-                .findFirst();
-
-        if (existingEngineer.isPresent()) {
-            SoftwareEngineer engineer = existingEngineer.get();
-            engineer.setName(updatedEngineer.getName());
-            engineer.setTechStack(updatedEngineer.getTechStack());
-            return engineer;
-        } else {
-            throw new RuntimeException("SoftwareEngineer with id " + id + " not found.");
-        }
+    @DeleteMapping("{id}")
+    public ResponseEntity<Void> deleteSoftwareEngineer(@PathVariable Integer id) {
+        softwareEngineerService.deleteSoftwareEngineerByID(id);
+        return ResponseEntity.noContent().build();
     }
-
-    @DeleteMapping("/{id}")
-    public String deleteSoftwareEngineer(@PathVariable int id) {
-        boolean removed = softwareEngineers.removeIf(se -> se.getId() == id);
-        if (removed) {
-            return "Deleted software engineer with id " + id;
-        } else {
-            return "Software engineer with id " + id + " not found.";
-        }
-    }
-    */
 }
