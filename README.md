@@ -28,41 +28,5 @@ It has a REST APIs, uses Spring Data JPA for database access, and runs the datab
 ### Stopping the database
 When done, stop the database container: `docker-compose down`
 
-## API endpoints
-
-Sure! Here’s a simple list of the API endpoints based on your `SoftwareEngineerController`:
-
----
-
 ## API Endpoints
-**GET** `/api/v1/software-engineers`
-Returns a list of all software engineers.
-
-**POST** `/api/v1/software-engineers`
-Request body (JSON):
-```json
-{
-  "name": "string",
-  "techStack": "string"
-}
-```
-Adds a new software engineer and returns the created object with an assigned ID.
-
-**PUT** `/api/v1/software-engineers/{id}`
-Path parameter:
-* `id` (integer) — ID of the software engineer to update
-  Request body (JSON):
-```json
-{
-  "name": "string",
-  "techStack": "string"
-}
-```
-Updates the software engineer with the given ID and returns the updated object.
-Returns an error if the ID does not exist.
-
-**DELETE** `/api/v1/software-engineers/{id}`
-Path parameter:
-* `id` (integer) — ID of the software engineer to delete
-  Deletes the software engineer with the given ID.
-  Returns a message confirming deletion or not found status.
+See [api-endpoints.md](./api-endpoints.md)
