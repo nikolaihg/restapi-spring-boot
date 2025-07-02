@@ -1,11 +1,22 @@
 package com.nikolaihg;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
 import java.util.Objects;
 
+@Entity
 public class SoftwareEngineer {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
     private String techStack;
+
+    public SoftwareEngineer() {}
 
     public SoftwareEngineer(Integer id, String name, String techStack) {
         this.id = id;

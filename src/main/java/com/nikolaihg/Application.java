@@ -15,7 +15,7 @@ public class Application {
 
     @GetMapping
     public String helloWorld() {
-        return "Hello World";
+        return "Service running";
     }
 
 }
